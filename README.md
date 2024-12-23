@@ -1,4 +1,5 @@
-# Docker Traefik Setup
+# Local AI Stack
+## Traefik | Ollama | Open WebUI | n8n
 
 This project provides a Docker-based setup using Traefik as a reverse proxy and load balancer, along with several integrated services including Ollama (AI model serving), Open WebUI (Ollama interface), and n8n (workflow automation).
 
