@@ -9,6 +9,7 @@ This project provides a Docker-based setup using Traefik as a reverse proxy and 
 - Docker Compose
 - A domain name (for SSL/TLS certificates)
 - Linode DNS (for automatic SSL certificate management)
+    - Other DNS providers are available. Please see https://doc.traefik.io/traefik/https/acme/#providers for more details.
 - NVIDIA GPU (for Ollama GPU acceleration)
 - NVIDIA Container Toolkit installed
 
