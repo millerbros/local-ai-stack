@@ -1,3 +1,4 @@
+
 services:
 
   traefik:
@@ -49,13 +50,14 @@ services:
               count: all
               capabilities: [gpu, compute, utility]
     volumes:
-      - ./ollama:/root/.ollama
+      - ollama:/root/.ollama
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.ollama.rule=Host(`${OLLAMA_SUBDOMAIN}.${DOMAIN}`)"
       - "traefik.http.routers.ollama.entrypoints=websecure"
       - "traefik.http.routers.ollama.tls.certresolver=linode"
       - "traefik.http.services.ollama.loadbalancer.server.port=11434"
+
 
   open-webui:
     image: ghcr.io/open-webui/open-webui:latest
@@ -67,7 +69,7 @@ services:
       - WEBUI_USERNAME=${WEBUI_USERNAME}
       - WEBUI_PASSWORD=${WEBUI_PASSWORD}
     volumes:
-      - ./open-webui:/app/backend/data
+      - open-webui:/app/backend/data
     depends_on:
       - ollama
     labels:
@@ -83,7 +85,7 @@ services:
     restart: unless-stopped
     environment:
       - N8N_HOST=${N8N_SUBDOMAIN}.${DOMAIN}
-      - N8N_PORT=5678
+      - N8N_PORT=443
       - N8N_PROTOCOL=https
       - N8N_BASIC_AUTH_ACTIVE=${N8N_BASIC_AUTH_ACTIVE}
       - N8N_BASIC_AUTH_USER=${N8N_BASIC_AUTH_USER}
@@ -91,13 +93,18 @@ services:
       - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY}
       - NODE_ENV=production
     volumes:
-      - ./n8n:/home/node/.n8n
+      - n8n:/home/node/.n8n
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.n8n.rule=Host(`${N8N_SUBDOMAIN}.${DOMAIN}`)"
       - "traefik.http.routers.n8n.entrypoints=websecure"
       - "traefik.http.routers.n8n.tls.certresolver=linode"
-      - "traefik.http.services.n8n.loadbalancer.server.port=5678"
+      - "traefik.http.services.n8n.loadbalancer.server.port=443"
+
+volumes:
+  ollama:
+  open-webui:
+  n8n:
 
 networks:
   default:
