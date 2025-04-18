@@ -1,5 +1,5 @@
 # Local AI Stack
-## Traefik | Ollama | Open WebUI | n8n | ComfyUI
+## Traefik | Ollama | Open WebUI | n8n
 
 This project provides a Docker-based setup using Traefik as a reverse proxy and load balancer, along with several integrated services including Ollama (AI model serving), Open WebUI (Ollama interface), and n8n (workflow automation).
 
@@ -10,7 +10,7 @@ This project provides a Docker-based setup using Traefik as a reverse proxy and 
 - A domain name (for SSL/TLS certificates)
 - Linode DNS (for automatic SSL certificate management)
     - Other DNS providers are available. Please see https://doc.traefik.io/traefik/https/acme/#providers for more details.
-- NVIDIA GPU (for Ollama/ComfyUI GPU acceleration)
+- NVIDIA GPU (for Ollama GPU acceleration)
 - NVIDIA Container Toolkit installed
 
 ## Project Structure
@@ -44,12 +44,6 @@ This project provides a Docker-based setup using Traefik as a reverse proxy and 
    - Automated workflow creation and management
    - Secure access with basic authentication
 
-5. **ComfyUI**: Stable Diffusion interface
-   - Node-based UI for image generation
-   - GPU-accelerated image processing
-   - Custom workflow creation
-   - Extensible with custom nodes
-
 ## Setup Instructions
 
 1. Clone this repository:
@@ -66,7 +60,6 @@ This project provides a Docker-based setup using Traefik as a reverse proxy and 
    OLLAMA_SUBDOMAIN=ollama
    OPENWEBUI_SUBDOMAIN=chat
    N8N_SUBDOMAIN=n8n
-   COMFYUI_SUBDOMAIN=comfyui
 
    # Traefik Configuration
    ACME_EMAIL=your-email@domain.com
@@ -105,7 +98,6 @@ After setup, your services will be available at:
 - Ollama API: `https://ollama.your-domain.com`
 - Open WebUI: `https://chat.your-domain.com`
 - n8n: `https://n8n.your-domain.com`
-- ComfyUI: `https://comfyui.your-domain.com`
 
 ## Security Features
 
