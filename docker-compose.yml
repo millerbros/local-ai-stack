@@ -100,38 +100,11 @@ services:
       - "traefik.http.routers.n8n.entrypoints=websecure"
       - "traefik.http.routers.n8n.tls.certresolver=linode"
       - "traefik.http.services.n8n.loadbalancer.server.port=443"
-  
-  comfyui:
-    image: mmartial/comfyui-nvidia-docker:latest
-    container_name: comfyui
-    restart: unless-stopped
-    environment:
-      - WANTED_UID=1000
-      - WANTED_GID=1000
-      - NVIDIA_VISIBLE_DEVICES=all
-      - NVIDIA_DRIVER_CAPABILITIES=all
-    volumes:
-      - comfyui:/comfy/mnt
-    runtime: nvidia
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities: [gpu, compute, utility]
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.comfyui.rule=Host(`${COMFYUI_SUBDOMAIN}.${DOMAIN}`)"
-      - "traefik.http.routers.comfyui.entrypoints=websecure"
-      - "traefik.http.routers.comfyui.tls.certresolver=linode"
-      - "traefik.http.services.comfyui.loadbalancer.server.port=8188"
 
 volumes:
   ollama:
   open-webui:
   n8n:
-  comfyui:
 
 networks:
   default:
